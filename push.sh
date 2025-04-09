@@ -15,6 +15,7 @@ for arg in "$@"; do
   esac
 done
 REPO="https://$GH_TOKEN@github.com/amarkes/truff.git"
+echo $GH_TOKEN
 
 # Commit e push
 git add .
