@@ -20,6 +20,8 @@ done
 REPO="https://$GH_TOKEN@github.com/amarkes/truff.git"
 
 # Commit e push
+git config user.name "amarkes"
+git config user.email "tmowna@gmail.com"
 git add .
 git commit -m "$COMMIT_MESSAGE"
 git push "$REPO" HEAD:main
