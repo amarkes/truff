@@ -18,7 +18,8 @@ Truff Miner é um idle game de mineração desenvolvido com **Vite + React + Tai
 
 ## 📸 Preview
 
-![Screenshot do jogo](./screenshot.png)
+![Screenshot do jogo](https://github.com/user-attachments/assets/ad37d87c-3566-4fc9-befa-2945f9958589)
+
 
 ---
 
