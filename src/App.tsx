@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { GameProvider } from "./context/GameContext";
+import { ClickButton } from "./components/ClickButton";
+import { ResourceDisplay } from "./components/ResourceDisplay";
+import { Store } from "./components/Store";
+import { MiningProgress } from "./components/MiningProgress";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <GameProvider>
+      <main className="flex flex-col min-h-screen p-4 bg-gray-100 dark:bg-zinc-900 text-black dark:text-white transition-all">
+        <h1 className="text-4xl font-bold text-center mb-6">🪨 Truff Miner</h1>
+        <div className="flex flex-1 gap-6">
+          <div className="flex flex-col gap-6 flex-1">
+            <ClickButton />
+            <MiningProgress />
+            <ResourceDisplay />
+          </div>
+          <Store />
+        </div>
+      </main>
+    </GameProvider>
+  );
 }
 
-export default App
+export default App;
