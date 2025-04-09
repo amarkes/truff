@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# Default message
+# Carrega variáveis do .env
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+fi
 COMMIT_MESSAGE="update"
 
 # Parse argumentos
@@ -15,7 +18,6 @@ for arg in "$@"; do
   esac
 done
 REPO="https://$GH_TOKEN@github.com/amarkes/truff.git"
-echo "Token visível? $GH_TOKEN"
 
 # Commit e push
 git add .
