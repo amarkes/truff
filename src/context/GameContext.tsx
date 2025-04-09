@@ -10,8 +10,10 @@ type GameContextType = {
   sell: () => void;
   machines: Record<MachineType, number>;
   buyMachine: (type: MachineType) => void;
+  buyMachineMultiple: (type: MachineType, qtd: number) => void;
   upgradeLevel: number;
   upgrade: () => void;
+  upgradeMultiple: () => void;
 };
 
 const GameContext = createContext({} as GameContextType);
@@ -64,11 +66,32 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const buyMachineMultiple = (type: MachineType, qtd: number) => {
+    const baseCosts = {
+      stoneMiner: 50,
+      goldMiner: 150,
+      diamondMiner: 500,
+    };
+
+    const cost = (baseCosts[type] + machines[type] * 50) * qtd;
+    if (money >= cost) {
+      setMoney((prev) => prev - cost);
+      setMachines((prev) => ({ ...prev, [type]: prev[type] + qtd}));
+    }
+  };
+
   const upgrade = () => {
     const cost = upgradeLevel * 100;
     if (money >= cost) {
       setMoney((prev) => prev - cost);
       setUpgradeLevel((prev) => prev + 1);
+    }
+  };
+  const upgradeMultiple = () => {
+    const cost = (upgradeLevel * 100) * 10;
+    if (money >= cost) {
+      setMoney((prev) => prev - cost);
+      setUpgradeLevel((prev) => prev + 10);
     }
   };
 
@@ -85,7 +108,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <GameContext.Provider
-      value={{ ores, money, mine, sell, machines, buyMachine, upgradeLevel, upgrade }}
+      value={{ ores, money, mine, sell, machines, buyMachine, upgradeLevel, upgrade, buyMachineMultiple, upgradeMultiple }}
     >
       {children}
     </GameContext.Provider>
