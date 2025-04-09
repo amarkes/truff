@@ -47,19 +47,18 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const sell = () => {
     const total =
-      (ores.stone * 2 + ores.gold * 10 + ores.diamond * 50) * upgradeLevel;
+      (ores.stone * 2 + ores.gold * 10 + ores.diamond * 50) * (upgradeLevel / 2);
     setMoney((prev) => prev + total);
     setOres({ stone: 0, gold: 0, diamond: 0 });
   };
 
   const buyMachine = (type: MachineType) => {
     const baseCosts = {
-      stoneMiner: 50,
-      goldMiner: 150,
-      diamondMiner: 500,
+      stoneMiner: 50 * machines[type],
+      goldMiner: 150 * machines[type],
+      diamondMiner: 500 * machines[type],
     };
-
-    const cost = baseCosts[type] + machines[type] * 50;
+    const cost = baseCosts[type];
     if (money >= cost) {
       setMoney((prev) => prev - cost);
       setMachines((prev) => ({ ...prev, [type]: prev[type] + 1 }));
@@ -81,14 +80,14 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const upgrade = () => {
-    const cost = upgradeLevel * 100;
+    const cost = (upgradeLevel * upgradeLevel) * 100;
     if (money >= cost) {
       setMoney((prev) => prev - cost);
       setUpgradeLevel((prev) => prev + 1);
     }
   };
   const upgradeMultiple = () => {
-    const cost = (upgradeLevel * 100) * 10;
+    const cost = ((upgradeLevel * upgradeLevel) * 100) * 10;
     if (money >= cost) {
       setMoney((prev) => prev - cost);
       setUpgradeLevel((prev) => prev + 10);

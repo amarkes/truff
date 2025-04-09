@@ -4,11 +4,11 @@ export const Store = () => {
   const { sell, buyMachine, upgrade, machines, upgradeLevel, money, buyMachineMultiple, upgradeMultiple } =
     useGame();
   const minerCosts = {
-    stoneMiner: 50 + machines.stoneMiner * 50,
-    goldMiner: 150 + machines.goldMiner * 50,
-    diamondMiner: 500 + machines.diamondMiner * 50,
+    stoneMiner:  (machines.stoneMiner * machines.stoneMiner) * 50,
+    goldMiner: (machines.goldMiner * machines.goldMiner) * 150,
+    diamondMiner: (machines.diamondMiner * machines.diamondMiner) * 500,
   };
-  const upgradeCost = upgradeLevel * 100;
+  const upgradeCost = (upgradeLevel * upgradeLevel) * 100;
 
   return (
     <div className="flex flex-col gap-4 items-end">
