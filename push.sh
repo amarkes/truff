@@ -28,4 +28,4 @@ git push "$REPO" HEAD:main
 
 
 # for publish
-# bash push.sh --commit="fix: ajusta layout mobile"
+# bash push.sh --commit="asdasdasdasdas"
