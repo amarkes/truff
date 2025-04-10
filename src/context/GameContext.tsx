@@ -53,10 +53,11 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const buyMachine = (type: MachineType) => {
+    console.log(machines[type])
     const baseCosts = {
-      stoneMiner: 50 * machines[type],
-      goldMiner: 150 * machines[type],
-      diamondMiner: 500 * machines[type],
+      stoneMiner: 50 * (machines[type] * machines[type]),
+      goldMiner: 150 * (machines[type] * machines[type]),
+      diamondMiner: 500 * (machines[type] * machines[type]),
     };
     const cost = baseCosts[type];
     if (money >= cost) {
@@ -67,12 +68,12 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const buyMachineMultiple = (type: MachineType, qtd: number) => {
     const baseCosts = {
-      stoneMiner: 50,
-      goldMiner: 150,
-      diamondMiner: 500,
+      stoneMiner: 50 * (machines[type] * machines[type]),
+      goldMiner: 150 * (machines[type] * machines[type]),
+      diamondMiner: 500 * (machines[type] * machines[type]),
     };
 
-    const cost = (baseCosts[type] + machines[type] * 50) * qtd;
+    const cost = baseCosts[type] * qtd;
     if (money >= cost) {
       setMoney((prev) => prev - cost);
       setMachines((prev) => ({ ...prev, [type]: prev[type] + qtd}));
